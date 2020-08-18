@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="censusanalyser.CensusAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-08-18T17:15:00" hostname="SUJITGARGATE" time="0.985">
+<testsuite name="censusanalyser.CensusAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-08-18T18:50:19" hostname="SUJITGARGATE" time="0.412">
   <properties/>
-  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.985"/>
-  <system-out><![CDATA[sujisssstsujitcom.opencsv.bean.CsvToBeanBuilder@36f87fcf
-sujitsujitcom.opencsv.bean.CsvToBeanBuilder@36f87fcf
+  <testcase name="givenWrongDelimiter_InIndiaCensusData_ShouldReturnCustomExceptionType" classname="censusanalyser.CensusAnalyserTest" time="0.412"/>
+  <system-out><![CDATA[Hello
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
