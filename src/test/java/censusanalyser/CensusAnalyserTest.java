@@ -9,6 +9,7 @@ public class CensusAnalyserTest {
     private static final String INDIA_CENSUS_CSV_FILE_PATH = "./src/test/resources/IndiaStateCensusData.csv";
     private static final String WRONG_CSV_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
 
+    //This Case Is For Checking Number Of Records Matches With Given Number
     @Test
     public void givenIndianCensusCSVFileReturnsCorrectRecords() throws Exception {
         try {
@@ -20,6 +21,7 @@ public class CensusAnalyserTest {
         }
     }
 
+    //This Case Is For Checking Wrong File Path Throws Exception
     @Test
     public void givenIndiaCensusData_WithWrongFile_ShouldThrowException() {
         try {
