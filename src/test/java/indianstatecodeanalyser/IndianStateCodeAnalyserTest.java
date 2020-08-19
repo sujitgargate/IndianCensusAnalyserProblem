@@ -1,7 +1,9 @@
 package indianstatecodeanalyser;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 public class IndianStateCodeAnalyserTest {
 
    private static final String INDIA_STATECODE_CSV_FILE_PATH = "./src/test/resources/IndiaStateCode.csv";
@@ -30,6 +32,17 @@ public class IndianStateCodeAnalyserTest {
          indianStateCode.loadIndiaCensusData(WRONG_CSV_FILE_PATH);
       } catch (IndianStateAnalyserException e) {
          Assert.assertEquals(IndianStateAnalyserException.ExceptionType.STATECODE_FILE_PROBLEM, e.type);
+      }
+   }
+
+   //This Case Is For Checking Wrong Delimiter Entered Or Not
+   @Test
+   public void givenWrongDelimiter_InFileData_ShouldThrowCustomException() {
+
+      try {
+         indianStateCode.loadIndiaCensusData(INDIA_STATECODE_CSV_FILE_PATH);
+      } catch (IndianStateAnalyserException e) {
+         Assert.assertEquals(IndianStateAnalyserException.ExceptionType.WRONG_DELIMITER, e.type);
       }
    }
 

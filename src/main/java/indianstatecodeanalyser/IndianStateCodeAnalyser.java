@@ -30,6 +30,9 @@ public class IndianStateCodeAnalyser {
       } catch (IOException e) {
          throw new IndianStateAnalyserException(e.getMessage(),
                  IndianStateAnalyserException.ExceptionType.STATECODE_FILE_PROBLEM);
+      } catch (RuntimeException e) {
+         throw new IndianStateAnalyserException(e.getMessage(),
+                 IndianStateAnalyserException.ExceptionType.WRONG_DELIMITER);
       }
    }
 }
