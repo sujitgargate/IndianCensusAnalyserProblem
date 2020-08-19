@@ -3,7 +3,7 @@ package censusanalyser;
 public class CensusAnalyserException extends Exception {
 
     enum ExceptionType {
-        Wrong_Delimiter, CENSUS_FILE_PROBLEM
+       WRONG_HEADER_OR_WRONG_DELIMITER, CENSUS_FILE_PROBLEM
     }
 
     ExceptionType type;

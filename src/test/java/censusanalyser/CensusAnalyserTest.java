@@ -41,7 +41,17 @@ public class CensusAnalyserTest {
       try {
          censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
       } catch (CensusAnalyserException e) {
-         Assert.assertEquals(CensusAnalyserException.ExceptionType.Wrong_Delimiter, e.type);
+         Assert.assertEquals(CensusAnalyserException.ExceptionType.WRONG_HEADER_OR_WRONG_DELIMITER, e.type);
       }
    }
+
+   @Test
+   public void givenProblemHeader_CSVData_ShouldReturnCustomException() {
+      try {
+         censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
+      } catch (CensusAnalyserException e) {
+         Assert.assertEquals(CensusAnalyserException.ExceptionType.WRONG_HEADER_OR_WRONG_DELIMITER, e.type);
+      }
+   }
+
 }
