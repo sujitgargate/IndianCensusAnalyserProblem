@@ -5,6 +5,7 @@ import org.junit.rules.ExpectedException;
 public class IndianStateCodeAnalyserTest {
 
    private static final String INDIA_STATECODE_CSV_FILE_PATH = "./src/test/resources/IndiaStateCode.csv";
+   private static final String WRONG_CSV_FILE_PATH = "./src/main/resources/IndiaStateCodeData.csv";
    IndianStateCodeAnalyser indianStateCode = new IndianStateCodeAnalyser();
    ExpectedException exceptionRule = ExpectedException.none();
 
@@ -19,4 +20,17 @@ public class IndianStateCodeAnalyserTest {
          Assert.assertEquals(IndianStateAnalyserException.ExceptionType.STATECODE_FILE_PROBLEM, e.type);
       }
    }
+
+   //This Case Is For Checking Wrong File Path Throws Exception
+   @Test
+   public void givenIndianStateCodeData_WithWrongFile_ShouldThrowException() {
+
+      try {
+         exceptionRule.expect(IndianStateAnalyserException.class);
+         indianStateCode.loadIndiaCensusData(WRONG_CSV_FILE_PATH);
+      } catch (IndianStateAnalyserException e) {
+         Assert.assertEquals(IndianStateAnalyserException.ExceptionType.STATECODE_FILE_PROBLEM, e.type);
+      }
+   }
+
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="indianstatecodeanalyser.IndianStateCodeAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-08-19T04:07:59" hostname="SUJITGARGATE" time="0.076">
+<testsuite name="indianstatecodeanalyser.IndianStateCodeAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-08-19T04:16:35" hostname="SUJITGARGATE" time="0.019">
   <properties/>
-  <testcase name="givenIndianStateCodeCSVFileReturnsCorrectRecords" classname="indianstatecodeanalyser.IndianStateCodeAnalyserTest" time="0.076"/>
+  <testcase name="givenIndianStateCodeData_WithWrongFile_ShouldThrowException" classname="indianstatecodeanalyser.IndianStateCodeAnalyserTest" time="0.019"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
