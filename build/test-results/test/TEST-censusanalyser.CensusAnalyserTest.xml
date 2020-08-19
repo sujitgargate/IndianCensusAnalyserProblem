@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="censusanalyser.CensusAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-08-19T03:32:04" hostname="SUJITGARGATE" time="0.341">
-  <properties/>
-  <testcase name="givenProblemHeader_CSVData_ShouldReturnCustomException" classname="censusanalyser.CensusAnalyserTest" time="0.341"/>
-  <system-out><![CDATA[Inside11
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
