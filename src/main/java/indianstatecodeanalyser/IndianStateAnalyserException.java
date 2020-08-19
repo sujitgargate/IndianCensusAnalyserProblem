@@ -3,7 +3,7 @@ package indianstatecodeanalyser;
 public class IndianStateAnalyserException extends Exception {
 
    enum ExceptionType {
-      WRONG_DELIMITER,STATECODE_FILE_PROBLEM
+      WRONG_HEADER_OR_WRONG_DELIMITER,STATECODE_FILE_PROBLEM
    }
 
    IndianStateAnalyserException.ExceptionType type;

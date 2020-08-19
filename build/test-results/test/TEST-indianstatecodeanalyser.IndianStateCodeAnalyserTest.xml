@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="indianstatecodeanalyser.IndianStateCodeAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-08-19T04:32:51" hostname="SUJITGARGATE" time="0.107">
+<testsuite name="indianstatecodeanalyser.IndianStateCodeAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-08-19T04:38:12" hostname="SUJITGARGATE" time="0.082">
   <properties/>
-  <testcase name="givenWrongDelimiter_InFileData_ShouldThrowCustomException" classname="indianstatecodeanalyser.IndianStateCodeAnalyserTest" time="0.107"/>
+  <testcase name="givenProblemHeader_CSVData_ShouldReturnCustomException" classname="indianstatecodeanalyser.IndianStateCodeAnalyserTest" time="0.082"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

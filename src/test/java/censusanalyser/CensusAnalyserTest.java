@@ -53,5 +53,4 @@ public class CensusAnalyserTest {
          Assert.assertEquals(CensusAnalyserException.ExceptionType.WRONG_HEADER_OR_WRONG_DELIMITER, e.type);
       }
    }
-
 }

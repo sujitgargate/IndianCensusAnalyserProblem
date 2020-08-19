@@ -42,8 +42,16 @@ public class IndianStateCodeAnalyserTest {
       try {
          indianStateCode.loadIndiaCensusData(INDIA_STATECODE_CSV_FILE_PATH);
       } catch (IndianStateAnalyserException e) {
-         Assert.assertEquals(IndianStateAnalyserException.ExceptionType.WRONG_DELIMITER, e.type);
+         Assert.assertEquals(IndianStateAnalyserException.ExceptionType.WRONG_HEADER_OR_WRONG_DELIMITER, e.type);
       }
    }
 
+   @Test
+   public void givenProblemHeader_CSVData_ShouldReturnCustomException() {
+      try {
+         indianStateCode.loadIndiaCensusData(INDIA_STATECODE_CSV_FILE_PATH);
+      } catch (IndianStateAnalyserException e) {
+         Assert.assertEquals(IndianStateAnalyserException.ExceptionType.WRONG_HEADER_OR_WRONG_DELIMITER, e.type);
+      }
+   }
 }

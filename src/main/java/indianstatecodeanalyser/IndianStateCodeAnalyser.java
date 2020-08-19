@@ -32,7 +32,7 @@ public class IndianStateCodeAnalyser {
                  IndianStateAnalyserException.ExceptionType.STATECODE_FILE_PROBLEM);
       } catch (RuntimeException e) {
          throw new IndianStateAnalyserException(e.getMessage(),
-                 IndianStateAnalyserException.ExceptionType.WRONG_DELIMITER);
+                 IndianStateAnalyserException.ExceptionType.WRONG_HEADER_OR_WRONG_DELIMITER);
       }
    }
 }
