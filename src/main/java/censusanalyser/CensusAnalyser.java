@@ -24,19 +24,23 @@ public class CensusAnalyser {
                  .withIgnoreLeadingWhiteSpace(true);
          CsvToBean<IndiaCensusCSV> csvToBean = csvToBeanBuilder.build();
          Iterator<IndiaCensusCSV> censusCSVIterator = csvToBean.iterator();
-         ;
+
          int numOfEnteries = 0;
          while (censusCSVIterator.hasNext()) {
             numOfEnteries++;
             IndiaCensusCSV censusData = censusCSVIterator.next();
          }
          return numOfEnteries;
+
       } catch (IOException e) {
          throw new CensusAnalyserException(e.getMessage(),
                  CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+      } catch (IllegalStateException e) {
+         throw new CensusAnalyserException(e.getMessage(),
+                 CensusAnalyserException.ExceptionType.FILE_CAN_NOT_PARSE);
       } catch (RuntimeException e) {
          throw new CensusAnalyserException(e.getMessage(),
-                 CensusAnalyserException.ExceptionType.WRONG_HEADER_OR_WRONG_DELIMITER);
+                 CensusAnalyserException.ExceptionType.WRONG_HEADER_OR_WRONG_DELIMITER_OR_WRONG_FILE_TYPE);
       }
    }
 }
