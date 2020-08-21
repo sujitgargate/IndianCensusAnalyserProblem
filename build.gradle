@@ -18,6 +18,7 @@ dependencies {
     compile "com.opencsv:opencsv:4.0"
 
     implementation 'com.opencsv:opencsv:5.0'
+    compile files("build/libs/CensusAnalyser")
 }
 
 

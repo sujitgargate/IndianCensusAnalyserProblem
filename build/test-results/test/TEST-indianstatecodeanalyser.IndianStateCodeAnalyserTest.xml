@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="indianstatecodeanalyser.IndianStateCodeAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-08-19T15:48:22" hostname="SUJITGARGATE" time="0.133">
-  <properties/>
-  <testcase name="givenIndiaCensusData_WhenWrongFileType_ShouldThrowException" classname="indianstatecodeanalyser.IndianStateCodeAnalyserTest" time="0.133"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
