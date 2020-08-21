@@ -13,11 +13,11 @@ import java.util.stream.StreamSupport;
 public class CensusAnalyser {
 
    //This Method Loads Census Data From File And Returns Count
-   public static int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
+   public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
       try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
          Iterator<IndiaCensusCSV> censusCSVIterator = getCSVFileIterator(reader, IndiaCensusCSV.class);
          Iterable<IndiaCensusCSV> csvIterable = () -> censusCSVIterator;
-         return (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
+         return getCount(censusCSVIterator);
       } catch (IOException e) {
          throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
       } catch (RuntimeException e) {
@@ -30,7 +30,7 @@ public class CensusAnalyser {
       try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
          Iterator<IndianStateCodeCSV> stateCSVIterator = getCSVFileIterator(reader, IndianStateCodeCSV.class);
          Iterable<IndianStateCodeCSV> csvIterable = () -> stateCSVIterator;
-         return (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
+         return getCount(stateCSVIterator);
       } catch (IOException e) {
          throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
       } catch (IllegalStateException e) {
@@ -38,6 +38,12 @@ public class CensusAnalyser {
       } catch (RuntimeException e) {
          throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.WRONG_HEADER_OR_WRONG_DELIMITER_OR_WRONG_FILE_TYPE);
       }
+   }
+
+   private <E> int getCount(Iterator<E> iterator) {
+      Iterable<E> csvIterable = () -> iterator;
+      int numbOfEntries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
+      return numbOfEntries;
    }
 
    //Common Method For Iterating Through CSV File
