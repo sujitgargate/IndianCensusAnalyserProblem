@@ -1,7 +1,6 @@
 package censusanalyser;
 
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
+import csvBuilder.*;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -13,7 +12,7 @@ import java.util.stream.StreamSupport;
 public class CensusAnalyser {
 
    //This Method Loads Census Data From File And Returns Count
-   public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
+   public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException, CSVException {
       try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
          ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
          Iterator<IndiaCensusCSV> censusCSVIterator = csvBuilder.getCSVFileIterator(reader, IndiaCensusCSV.class);
@@ -26,7 +25,7 @@ public class CensusAnalyser {
    }
 
    //This Method Loads State Code Data From File And Returns Count
-   public int loadIndiaStateCodeData(String csvFilePath) throws CensusAnalyserException {
+   public int loadIndiaStateCodeData(String csvFilePath) throws CensusAnalyserException, CSVException {
       try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
          ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
          Iterator<IndianStateCodeCSV> stateCSVIterator = csvBuilder.getCSVFileIterator(reader, IndianStateCodeCSV.class);

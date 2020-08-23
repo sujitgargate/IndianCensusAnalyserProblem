@@ -15,10 +15,8 @@ dependencies {
     // Set this dependency if you want to use Hamcrest matching
     testImplementation 'org.hamcrest:hamcrest-library:1.3'
     compile 'com.google.code.gson:gson:2.2.+'
-    compile "com.opencsv:opencsv:4.0"
+    compile files("./libs/CSVBuilderJar.main.jar")
 
-    implementation 'com.opencsv:opencsv:5.0'
-    compile files("build/libs/CensusAnalyser")
 }
 
 

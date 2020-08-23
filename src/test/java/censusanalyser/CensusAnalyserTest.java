@@ -1,5 +1,6 @@
 package censusanalyser;
 
+import csvBuilder.CSVException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -13,7 +14,7 @@ public class CensusAnalyserTest {
    private static final String INDIA_STATE_CODE_CSV_FILE_PATH = "./src/test/resources/IndiaStateCode.csv";
 
    @Test
-   public void givenIndianCensusCSVFileReturnsCorrectRecords() {
+   public void givenIndianCensusCSVFileReturnsCorrectRecords() throws CSVException {
       try {
          CensusAnalyser censusAnalyser = new CensusAnalyser();
          int numOfRecords = censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
@@ -23,7 +24,7 @@ public class CensusAnalyserTest {
    }
 
    @Test
-   public void givenIndiaCensusData_WithWrongFile_ShouldThrowException() {
+   public void givenIndiaCensusData_WithWrongFile_ShouldThrowException() throws CSVException {
       try {
          CensusAnalyser censusAnalyser = new CensusAnalyser();
          ExpectedException exceptionRule = ExpectedException.none();
@@ -35,7 +36,7 @@ public class CensusAnalyserTest {
    }
 
    @Test
-   public void givenIndiaCensusData_WhenWrongType_ShouldThrowException() {
+   public void givenIndiaCensusData_WhenWrongType_ShouldThrowException() throws CSVException {
       try {
          CensusAnalyser censusAnalyser = new CensusAnalyser();
          ExpectedException exceptionRule = ExpectedException.none();
@@ -47,7 +48,7 @@ public class CensusAnalyserTest {
    }
 
    @Test
-   public void givenIndiaCensusData_WhenDelimiterIncorrect_ShouldThrowException() {
+   public void givenIndiaCensusData_WhenDelimiterIncorrect_ShouldThrowException() throws CSVException {
       try {
          CensusAnalyser censusAnalyser = new CensusAnalyser();
          ExpectedException exceptionRule = ExpectedException.none();
@@ -59,7 +60,7 @@ public class CensusAnalyserTest {
    }
 
    @Test
-   public void givenIndiaCensusData_WhenHeaderIncorrect_ShouldThrowException() {
+   public void givenIndiaCensusData_WhenHeaderIncorrect_ShouldThrowException() throws CSVException {
       try {
          CensusAnalyser censusAnalyser = new CensusAnalyser();
          ExpectedException exceptionRule = ExpectedException.none();
@@ -71,7 +72,7 @@ public class CensusAnalyserTest {
    }
 
    @Test
-   public void givenIndianStateCodeCSVFileReturnsCorrectRecords() {
+   public void givenIndianStateCodeCSVFileReturnsCorrectRecords() throws CSVException {
       try {
          CensusAnalyser censusAnalyser = new CensusAnalyser();
          int numOfRecords = 0;
@@ -82,7 +83,7 @@ public class CensusAnalyserTest {
    }
 
    @Test
-   public void givenIndiaStateCode_WithWrongFile_ShouldThrowException() {
+   public void givenIndiaStateCode_WithWrongFile_ShouldThrowException() throws CSVException {
       try {
          CensusAnalyser censusAnalyser = new CensusAnalyser();
          ExpectedException exceptionRule = ExpectedException.none();
@@ -94,7 +95,7 @@ public class CensusAnalyserTest {
    }
 
    @Test
-   public void givenIndiaStateCode_WhenWrongType_ShouldThrowException() {
+   public void givenIndiaStateCode_WhenWrongType_ShouldThrowException() throws CSVException {
       try {
          CensusAnalyser censusAnalyser = new CensusAnalyser();
          ExpectedException exceptionRule = ExpectedException.none();
@@ -106,7 +107,7 @@ public class CensusAnalyserTest {
    }
 
    @Test
-   public void givenIndiaStateCode_WhenDelimiterIncorrect_ShouldThrowException() {
+   public void givenIndiaStateCode_WhenDelimiterIncorrect_ShouldThrowException() throws CSVException {
       try {
          CensusAnalyser censusAnalyser = new CensusAnalyser();
          ExpectedException exceptionRule = ExpectedException.none();
@@ -118,7 +119,7 @@ public class CensusAnalyserTest {
    }
 
    @Test
-   public void givenIndiaStateCode_WhenHeaderIncorrect_ShouldThrowException() {
+   public void givenIndiaStateCode_WhenHeaderIncorrect_ShouldThrowException() throws CSVException {
       try {
          CensusAnalyser censusAnalyser = new CensusAnalyser();
          ExpectedException exceptionRule = ExpectedException.none();
