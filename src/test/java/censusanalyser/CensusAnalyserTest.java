@@ -144,7 +144,7 @@ public class CensusAnalyserTest {
          String SortedCensusData = censusAnalyser.getStateWiseSortedCensusData();
          IndiaCensusCSV[] censusCSV = new Gson().fromJson(SortedCensusData, IndiaCensusCSV[].class);
          Assert.assertEquals("Andhra Pradesh", censusCSV[0].state);
-      } catch(CensusAnalyserException e) {
+      } catch (CensusAnalyserException e) {
          System.out.println("Error Occured While Parsing Data");
       }
    }
@@ -179,6 +179,27 @@ public class CensusAnalyserTest {
          System.out.println();
       } catch (IOException e) {
          e.printStackTrace();
+      }
+   }
+
+   @Test
+   public void givenIndianCensusCSVFile_whenSortedOnPopulationDensity_shouldReturnSortedResult() throws CSVException {
+      try {
+         CensusAnalyser censusAnalyser = new CensusAnalyser();
+         censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
+         String stateWiseSortedCensusData = censusAnalyser.getSortedCensusDataPopulationDensity();
+         IndiaCensusCSV[] censusCSV = new Gson().fromJson(stateWiseSortedCensusData, IndiaCensusCSV[].class);
+         Assert.assertEquals("Bihar", censusCSV[0].state);
+         FileWriter writer = new FileWriter(SAMPLE_JSON_FILE_PATH);
+         for (int i = 0; i < censusCSV.length; i++) {
+            writer.write(String.valueOf(censusCSV[i]));
+            writer.write(" , ");
+         }
+         writer.close();
+      } catch (CensusAnalyserException e) {
+         Assert.assertEquals(CensusAnalyserException.ExceptionType.NO_CENSUS_DATA, e.type);
+      } catch (IOException e) {
+         System.out.println("File Can't Be Parsed");
       }
    }
 }

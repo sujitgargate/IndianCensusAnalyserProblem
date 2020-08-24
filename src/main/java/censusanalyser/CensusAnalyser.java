@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class CensusAnalyser {
@@ -72,7 +73,7 @@ public class CensusAnalyser {
             if (censusComparator.compare(census1, census2) < 0) {
                indianDataList.set(j, census2);
                indianDataList.set(j + 1, census1);
-               sortingCount ++;
+               sortingCount++;
             }
          }
       }
@@ -97,5 +98,15 @@ public class CensusAnalyser {
       this.sort(censusCSVList, censusComparator);
       String sortedStateCensusJson = new Gson().toJson(censusCSVList);
       return sortedStateCensusJson;
+   }
+
+   public String getSortedCensusDataPopulationDensity() throws CensusAnalyserException {
+      if (censusCSVList == null || censusCSVList.size() == 0) {
+         throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
+      }
+      Comparator<IndiaCensusCSV> censusComparator = Comparator.comparing(census -> census.densityPerSqKm);
+      this.sort(censusCSVList, censusComparator);
+      String sortedPopulationCensusJson = new Gson().toJson(censusCSVList);
+      return sortedPopulationCensusJson;
    }
 }
