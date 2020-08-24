@@ -6,7 +6,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.io.*;
 import java.security.cert.CertStoreException;
+import java.util.Arrays;
 
 public class CensusAnalyserTest {
 
@@ -15,6 +17,7 @@ public class CensusAnalyserTest {
    private static final String WRONG_INPUT_CSV_FILE = "./src/test/resources/Wrong_CSV_File.txt";
    private static final String WRONG_DELIMITER_CSVFILE = "./src/test/resources/Wrong_HeaderAndDelimiter.csv";
    private static final String INDIA_STATE_CODE_CSV_FILE_PATH = "./src/test/resources/IndiaStateCode.csv";
+   private static final String SAMPLE_JSON_FILE_PATH = "./src/test/resources/SAMPLE_JSON_FILE_PATH.json";
 
    @Test
    public void givenIndianCensusCSVFileReturnsCorrectRecords() throws CSVException {
@@ -167,8 +170,15 @@ public class CensusAnalyserTest {
          String stateWiseSortedCensusData = censusAnalyser.getPopulationWiseSortedData();
          IndiaCensusCSV[] censusCSV = new Gson().fromJson(stateWiseSortedCensusData, IndiaCensusCSV[].class);
          Assert.assertEquals("Uttar Pradesh", censusCSV[0].state);
+         FileWriter writer = new FileWriter(SAMPLE_JSON_FILE_PATH);
+         writer.write(String.valueOf(censusCSV[0]));
+         writer.close();
       } catch (CensusAnalyserException e) {
          Assert.assertEquals(CensusAnalyserException.ExceptionType.NO_CENSUS_DATA, e.type);
+      } catch (FileNotFoundException e) {
+         System.out.println();
+      } catch (IOException e) {
+         e.printStackTrace();
       }
    }
 }
