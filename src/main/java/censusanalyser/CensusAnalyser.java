@@ -64,13 +64,13 @@ public class CensusAnalyser {
 
    //Using Merge Sort TO Sort Data
    private <E> List<E> sort(List<E> indianDataList, Comparator<E> censusComparator) {
-      for (int i = 0; i < indianDataList.size()-1; i++) {
-         for (int j =0; j< indianDataList.size() -i -1; j++) {
+      for (int i = 0; i < indianDataList.size() - 1; i++) {
+         for (int j = 0; j < indianDataList.size() - i - 1; j++) {
             E census1 = indianDataList.get(j);
-            E census2 = indianDataList.get(j+1);
-            if (censusComparator.compare(census1, census2) > 0){
+            E census2 = indianDataList.get(j + 1);
+            if (censusComparator.compare(census1, census2) < 0) {
                indianDataList.set(j, census2);
-               indianDataList.set(j+1, census1);
+               indianDataList.set(j + 1, census1);
             }
          }
       }
@@ -85,6 +85,14 @@ public class CensusAnalyser {
       Comparator<IndianStateCodeCSV> stateCodeComparator = Comparator.comparing(census -> census.stateCode);
       this.sort(stateCSVList, stateCodeComparator);
       String sortedStateCensusJson = new Gson().toJson(stateCSVList);
+      return sortedStateCensusJson;
+   }
+
+   //Sorting data based on Population of Each State
+   public String getPopulationWiseSortedData() {
+      Comparator<IndiaCensusCSV> censusComparator = Comparator.comparing(census -> census.Population);
+      this.sort(censusCSVList, censusComparator);
+      String sortedStateCensusJson = new Gson().toJson(censusCSVList);
       return sortedStateCensusJson;
    }
 }

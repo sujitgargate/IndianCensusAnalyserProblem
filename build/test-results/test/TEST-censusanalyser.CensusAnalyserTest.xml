@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="censusanalyser.CensusAnalyserTest" tests="1" skipped="1" failures="0" errors="0" timestamp="2020-08-24T03:39:52" hostname="SUJITGARGATE" time="156.798">
+<testsuite name="censusanalyser.CensusAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-08-24T04:03:48" hostname="SUJITGARGATE" time="0.291">
   <properties/>
-  <testcase name="givenIndiaStateCodeFile_whenSortedOnStateCode_shouldReturnSortedResult" classname="censusanalyser.CensusAnalyserTest" time="156.798">
-    <skipped/>
-  </testcase>
+  <testcase name="givenIndianCensusCSVFile_whenSortedOnPopulation_shouldReturnSortedResult" classname="censusanalyser.CensusAnalyserTest" time="0.291"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
