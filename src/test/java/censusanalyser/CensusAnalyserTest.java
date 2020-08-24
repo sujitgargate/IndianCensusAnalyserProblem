@@ -1,5 +1,6 @@
 package censusanalyser;
 
+import com.google.gson.Gson;
 import csvBuilder.CSVException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -127,6 +128,19 @@ public class CensusAnalyserTest {
          censusAnalyser.loadIndiaCensusData(WRONG_DELIMITER_CSVFILE);
       } catch (CensusAnalyserException e) {
          Assert.assertEquals(CensusAnalyserException.ExceptionType.WRONG_HEADER_OR_WRONG_DELIMITER_OR_WRONG_FILE_TYPE, e.type);
+      }
+   }
+
+   @Test
+   public void givenIndiaStateCode_WhenSortedOnState_ShouldReturnSortedResult() throws CSVException {
+      try {
+         CensusAnalyser censusAnalyser = new CensusAnalyser();
+         censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
+         String SortedCensusData = censusAnalyser.getStateWiseSortedCensusData();
+         IndiaCensusCSV[] censusCSV = new Gson().fromJson(SortedCensusData, IndiaCensusCSV[].class);
+         Assert.assertEquals("Andhra Pradesh", censusCSV[0].state);
+      } catch(CensusAnalyserException e) {
+         System.out.println("Error Occured While Parsing Data");
       }
    }
 }
