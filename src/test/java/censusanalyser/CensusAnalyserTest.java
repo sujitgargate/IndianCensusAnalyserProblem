@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.security.cert.CertStoreException;
+
 public class CensusAnalyserTest {
 
    private static final String INDIA_CENSUS_CSV_FILE_PATH = "./src/test/resources/IndiaStateCensusData.csv";
@@ -141,6 +143,19 @@ public class CensusAnalyserTest {
          Assert.assertEquals("Andhra Pradesh", censusCSV[0].state);
       } catch(CensusAnalyserException e) {
          System.out.println("Error Occured While Parsing Data");
+      }
+   }
+
+   @Test
+   public void givenIndiaStateCodeFile_whenSortedOnStateCode_shouldReturnSortedResult() throws CSVException {
+      try {
+         CensusAnalyser censusAnalyser = new CensusAnalyser();
+         censusAnalyser.loadIndiaStateCodeData(INDIA_STATE_CODE_CSV_FILE_PATH);
+         String stateWiseSortedData = censusAnalyser.getStateWiseSortedStateCodeData();
+         IndianStateCodeCSV[] indianStateCodeCSV = new Gson().fromJson(stateWiseSortedData, IndianStateCodeCSV[].class);
+         Assert.assertEquals("AP", indianStateCodeCSV[0].stateCode);
+      } catch (CensusAnalyserException e) {
+         Assert.assertEquals(CensusAnalyserException.ExceptionType.NO_CENSUS_DATA, e.type);
       }
    }
 }
