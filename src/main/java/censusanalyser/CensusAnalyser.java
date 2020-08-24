@@ -64,6 +64,7 @@ public class CensusAnalyser {
 
    //Using Merge Sort TO Sort Data
    private <E> List<E> sort(List<E> indianDataList, Comparator<E> censusComparator) {
+      int sortingCount = 0;
       for (int i = 0; i < indianDataList.size() - 1; i++) {
          for (int j = 0; j < indianDataList.size() - i - 1; j++) {
             E census1 = indianDataList.get(j);
@@ -71,9 +72,11 @@ public class CensusAnalyser {
             if (censusComparator.compare(census1, census2) < 0) {
                indianDataList.set(j, census2);
                indianDataList.set(j + 1, census1);
+               sortingCount ++;
             }
          }
       }
+      System.out.println(sortingCount + "Times Sorting Has Done");
       return indianDataList;
    }
 
