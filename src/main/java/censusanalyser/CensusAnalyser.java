@@ -7,23 +7,30 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class CensusAnalyser {
 
-   List<IndiaCensusCSV> censusCSVList = null;
+   List<IndiaCensusDAO> censusList = null;
    List<IndianStateCodeCSV> stateCSVList = null;
+
+   public CensusAnalyser() {
+      this.censusList = new ArrayList<IndiaCensusDAO>();
+   }
 
    //This Method Loads Census Data From File And Returns Count
    public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException, CSVException {
       try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
          ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-         censusCSVList = csvBuilder.getCSVList(reader, IndiaCensusCSV.class);
-         return censusCSVList.size();
+         Iterator<IndiaCensusCSV> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IndiaCensusCSV.class);
+         while (csvFileIterator.hasNext()) {
+            this.censusList.add(new IndiaCensusDAO(csvFileIterator.next()));
+         }
+         return this.censusList.size();
       } catch (IOException e) {
          throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
       } catch (RuntimeException e) {
@@ -54,16 +61,16 @@ public class CensusAnalyser {
 
    //Parsing Sorted Data in Json Format
    public String getStateWiseSortedCensusData() throws CensusAnalyserException {
-      if (censusCSVList == null || censusCSVList.size() == 0) {
+      if (censusList == null || censusList.size() == 0) {
          throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
       }
-      Comparator<IndiaCensusCSV> censusComparator = Comparator.comparing(census -> census.state);
-      this.sort(censusCSVList, censusComparator);
-      String sortedStateCensusJson = new Gson().toJson(censusCSVList);
+      Comparator<IndiaCensusDAO> censusComparator = Comparator.comparing(census -> census.state);
+      this.sort(censusList, censusComparator);
+      String sortedStateCensusJson = new Gson().toJson(censusList);
       return sortedStateCensusJson;
    }
 
-   //Using Merge Sort TO Sort Data
+   //Using Bubble Sort TO Sort Data
    private <E> List<E> sort(List<E> indianDataList, Comparator<E> censusComparator) {
       int sortingCount = 0;
       for (int i = 0; i < indianDataList.size() - 1; i++) {
@@ -94,19 +101,19 @@ public class CensusAnalyser {
 
    //Sorting data based on Population of Each State
    public String getPopulationWiseSortedData() {
-      Comparator<IndiaCensusCSV> censusComparator = Comparator.comparing(census -> census.Population);
-      this.sort(censusCSVList, censusComparator);
-      String sortedStateCensusJson = new Gson().toJson(censusCSVList);
+      Comparator<IndiaCensusDAO> censusComparator = Comparator.comparing(census -> census.population);
+      sort(this.censusList, censusComparator);
+      String sortedStateCensusJson = new Gson().toJson(censusList);
       return sortedStateCensusJson;
    }
 
    public String getSortedCensusDataPopulationDensity() throws CensusAnalyserException {
-      if (censusCSVList == null || censusCSVList.size() == 0) {
+      if (censusList == null || censusList.size() == 0) {
          throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
       }
-      Comparator<IndiaCensusCSV> censusComparator = Comparator.comparing(census -> census.densityPerSqKm);
-      this.sort(censusCSVList, censusComparator);
-      String sortedPopulationCensusJson = new Gson().toJson(censusCSVList);
+      Comparator<IndiaCensusDAO> censusComparator = Comparator.comparing(census -> census.densityPerSqKm);
+      sort(censusList, censusComparator);
+      String sortedPopulationCensusJson = new Gson().toJson(censusList);
       return sortedPopulationCensusJson;
    }
 }

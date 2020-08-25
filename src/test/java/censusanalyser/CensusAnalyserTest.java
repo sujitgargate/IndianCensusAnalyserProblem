@@ -7,8 +7,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.*;
-import java.security.cert.CertStoreException;
-import java.util.Arrays;
 
 public class CensusAnalyserTest {
 
