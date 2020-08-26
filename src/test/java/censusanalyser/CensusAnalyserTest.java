@@ -241,8 +241,46 @@ public class CensusAnalyserTest {
          writer.close();
       }catch (CensusAnalyserException | IOException e ) {
          System.out.println("Exception Occured");
-
       }
    }
+
+   @Test
+   public void givenUSCensusData_WhenSortedOnStateDensity_ShouldReturnSortedResult() throws CSVException {
+      try{
+         CensusAnalyser censusAnalyser = new CensusAnalyser();
+         censusAnalyser.loadUSCensusData(US_CENSUS_CSV_FILE_PATH);
+         String sortedCensusData = censusAnalyser.getUSSortedCensusDataStateDensity();
+         UsCensusCSV[] usCensusCSV =  new Gson().fromJson(sortedCensusData, UsCensusCSV[].class);
+
+         Assert.assertEquals(2.24, usCensusCSV[0].populationDensity, 0);
+         FileWriter writer = new FileWriter(SAMPLE_JSON_FILE_PATH);
+         for (int i = 0; i < usCensusCSV.length; i++) {
+            writer.write(String.valueOf(usCensusCSV[i]));
+            writer.write(" , ");
+         }
+         writer.close();
+      }catch (CensusAnalyserException | IOException e ) {
+         System.out.println("Exception Occured");
+      }
+   }
+   @Test
+   public void givenUSCensusData_WhenSortedOnStateArea_ShouldReturnSortedResult() throws CSVException {
+      try{
+         CensusAnalyser censusAnalyser = new CensusAnalyser();
+         censusAnalyser.loadUSCensusData(US_CENSUS_CSV_FILE_PATH);
+         String sortedCensusData = censusAnalyser.getUSSortedCensusDataStateDensity();
+         UsCensusCSV[] usCensusCSV =  new Gson().fromJson(sortedCensusData, UsCensusCSV[].class);
+         Assert.assertEquals(253334.72, usCensusCSV[0].areaOfState, 0);
+         FileWriter writer = new FileWriter(SAMPLE_JSON_FILE_PATH);
+         for (int i = 0; i < usCensusCSV.length; i++) {
+            writer.write(String.valueOf(usCensusCSV[i]));
+            writer.write(" , ");
+         }
+         writer.close();
+      }catch (CensusAnalyserException | IOException e ) {
+         System.out.println("Exception Occured");
+      }
+   }
+
 
 }

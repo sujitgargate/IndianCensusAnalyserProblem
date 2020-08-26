@@ -148,4 +148,15 @@ public class CensusAnalyser {
       this.sort(censusDAOS, censusComparator);
       return new Gson().toJson(censusDAOS);
    }
+
+   //Returns High population State Data
+   public String getUSSortedCensusDataStateDensity() throws CensusAnalyserException {
+      if (censusStateMap == null || censusStateMap.size() == 0) {
+         throw new CensusAnalyserException("No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
+      }
+      Comparator<CensusDAO> censusComparator = Comparator.comparing(census -> census.Population);
+      List<CensusDAO> censusDAOS = censusStateMap.values().stream().collect(Collectors.toList());
+      this.sort(censusDAOS, censusComparator);
+      return new Gson().toJson(censusDAOS);
+   }
 }

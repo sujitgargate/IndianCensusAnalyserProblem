@@ -7,7 +7,7 @@ public class CensusDAO {
    public String State;
    public String state;
    public String stateId;
-   public double totalArea;
+   public double areaOfState;
    public double populationDensity;
    public double Population;
 
@@ -22,7 +22,7 @@ public class CensusDAO {
    public CensusDAO(UsCensusCSV UsCensusCSV) {
       State = UsCensusCSV.State;
       stateId = UsCensusCSV.stateId;
-      totalArea = UsCensusCSV.totalArea;
+      areaOfState = UsCensusCSV.areaOfState;
       populationDensity = UsCensusCSV.populationDensity;
       Population = UsCensusCSV.Population;
    }
