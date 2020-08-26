@@ -5,6 +5,7 @@ public class IndiaCensusDAO {
    public int densityPerSqKm;
    public int areaInSqKm;
    public String state;
+   public int stateCode;
 
    public IndiaCensusDAO(IndiaCensusCSV indiaCensusCSV) {
       state = indiaCensusCSV.state;

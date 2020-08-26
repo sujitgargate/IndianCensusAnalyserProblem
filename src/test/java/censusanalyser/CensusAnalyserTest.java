@@ -24,6 +24,7 @@ public class CensusAnalyserTest {
          int numOfRecords = censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
          Assert.assertEquals(29, numOfRecords);
       } catch (CensusAnalyserException e) {
+         System.out.println("Data Not Found");
       }
    }
 
@@ -76,13 +77,14 @@ public class CensusAnalyserTest {
    }
 
    @Test
-   public void givenIndianStateCodeCSVFileReturnsCorrectRecords() throws CSVException {
+   public void givenIndianStateCodeCSVFileReturnsCorrectRecords() throws CSVException, CensusAnalyserException {
       try {
          CensusAnalyser censusAnalyser = new CensusAnalyser();
          int numOfRecords = 0;
          numOfRecords = censusAnalyser.loadIndiaStateCodeData(INDIA_STATE_CODE_CSV_FILE_PATH);
          Assert.assertEquals(37, numOfRecords);
       } catch (CensusAnalyserException e) {
+         System.out.println("Exception Occured");
       }
    }
 
@@ -95,6 +97,7 @@ public class CensusAnalyserTest {
          censusAnalyser.loadIndiaCensusData(WRONG_CSV_FILE_PATH);
       } catch (CensusAnalyserException e) {
          Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
+         System.out.println("Exception Occured");
       }
    }
 
@@ -107,6 +110,7 @@ public class CensusAnalyserTest {
          censusAnalyser.loadIndiaCensusData(WRONG_INPUT_CSV_FILE);
       } catch (CensusAnalyserException e) {
          Assert.assertEquals(CensusAnalyserException.ExceptionType.WRONG_HEADER_OR_WRONG_DELIMITER_OR_WRONG_FILE_TYPE, e.type);
+         System.out.println("Exception Occured");
       }
    }
 
@@ -173,10 +177,11 @@ public class CensusAnalyserTest {
          writer.close();
       } catch (CensusAnalyserException e) {
          Assert.assertEquals(CensusAnalyserException.ExceptionType.NO_CENSUS_DATA, e.type);
+         System.out.println(" 1");
       } catch (FileNotFoundException e) {
-         System.out.println();
+         System.out.println(" 2");
       } catch (IOException e) {
-         e.printStackTrace();
+         System.out.println(" 3");
       }
    }
 
