@@ -84,11 +84,15 @@ public class CensusAnalyserTest {
    }
 
    @Test
-   public void givenIndiaStateCode_WithWrongFile_ShouldThrowException() throws CSVException {
+   public void givenIndiaStateCode_WithWrongFile_ShouldThrowException() {
+      try {
          CensusAnalyser censusAnalyser = new CensusAnalyser();
          ExpectedException exceptionRule = ExpectedException.none();
          exceptionRule.expect(CensusAnalyserException.class);
          censusAnalyser.loadIndiaCensusData(WRONG_CSV_FILE_PATH);
+      } catch (CSVException e) {
+         Assert.assertEquals(CSVException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
+      }
    }
 
    @Test
@@ -207,4 +211,38 @@ public class CensusAnalyserTest {
          System.out.println("Exception Occured");
       }
    }
+
+   @Test
+   public void givenUSCensusData_WhenSortedOnStateCode_ShouldReturnSortedResult() throws CSVException {
+      try{
+         CensusAnalyser censusAnalyser = new CensusAnalyser();
+         censusAnalyser.loadUSCensusData(US_CENSUS_CSV_FILE_PATH);
+         String sortedCensusData = censusAnalyser.getUsStateWiseSortedStateCodeData();
+         UsCensusCSV[] usCensusCSV =  new Gson().fromJson(sortedCensusData, UsCensusCSV[].class);
+         Assert.assertEquals("AK", usCensusCSV[0].stateId);
+      }catch (CensusAnalyserException e ) {
+         System.out.println("Exception Occured");
+      }
+   }
+
+   @Test
+   public void givenUSCensusData_WhenSortedOnStatePopulation_ShouldReturnSortedResult() throws CSVException {
+      try{
+         CensusAnalyser censusAnalyser = new CensusAnalyser();
+         censusAnalyser.loadUSCensusData(US_CENSUS_CSV_FILE_PATH);
+         String sortedCensusData = censusAnalyser.getUSSortedCensusDataPopulationDensity();
+         UsCensusCSV[] usCensusCSV =  new Gson().fromJson(sortedCensusData, UsCensusCSV[].class);
+         Assert.assertEquals("Wyoming", usCensusCSV[0].State);
+         FileWriter writer = new FileWriter(SAMPLE_JSON_FILE_PATH);
+         for (int i = 0; i < usCensusCSV.length; i++) {
+            writer.write(String.valueOf(usCensusCSV[i]));
+            writer.write(" , ");
+         }
+         writer.close();
+      }catch (CensusAnalyserException | IOException e ) {
+         System.out.println("Exception Occured");
+
+      }
+   }
+
 }

@@ -11,7 +11,7 @@ public class UsCensusCSV {
    public String stateId;
 
    @CsvBindByName(column = "Population", required = true)
-   public int population;
+   public int Population;
 
    @CsvBindByName(column = "Total area", required = true)
    public double totalArea;
@@ -24,7 +24,7 @@ public class UsCensusCSV {
       return "UsCensusCSV{" +
               "State='" + State + '\'' +
               ", State Id='" + stateId + '\'' +
-              ", Population='" + population + '\'' +
+              ", Population='" + Population + '\'' +
               ", Total Area='" + totalArea + '\'' +
               ", population Density='" + populationDensity + '\'' +
               '}';
