@@ -29,4 +29,6 @@ public class CensusDAO {
 
    public CensusDAO(IndianStateCodeCSV censusCSV) {
    }
+   public <R> CensusDAO(R censusCSV) {
+   }
 }
